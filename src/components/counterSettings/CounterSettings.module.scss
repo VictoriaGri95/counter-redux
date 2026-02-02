@@ -1,0 +1,18 @@
+.counterWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  border: 2px solid #60b9ea;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 80px;
+  border: 2px solid #60b9ea;
+  padding: 30px 50px;
+  border-radius: 10px;
+  justify-content: center;
+}

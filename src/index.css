@@ -1,0 +1,15 @@
+:root {
+
+  background-color: #242424;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+

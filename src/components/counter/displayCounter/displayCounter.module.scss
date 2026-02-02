@@ -1,0 +1,26 @@
+.displayCounter {
+  //background-color: #60b9ea;
+  border: 2px solid #60b9ea;
+  padding: 50px 0;
+  border-radius: 10px;
+  color: #60b9ea;
+  text-align: center;
+  height: 180px;
+}
+
+.counter-red {
+  color: red;
+}
+
+.errorText {
+  color: #ff4444;
+  font-size: 30px;
+  letter-spacing: 2px;
+  animation: errorBlink 1s infinite;
+}
+
+.message {
+  color: #60b9ea;
+  font-size: 20px;
+  letter-spacing: 2px;
+}

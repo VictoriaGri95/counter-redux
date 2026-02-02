@@ -1,0 +1,42 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #60b9ea;
+  padding: 20px 10px;
+  border-radius: 10px;
+  color: #60b9ea;
+  gap: 30px;
+  height: 180px;
+  justify-content: center;
+}
+
+.settingInput {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+
+
+}
+
+.label {
+  color: #60b9ea;
+  font-size: 1.5rem;
+  font-weight: 800;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #60b9ea;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #242424;
+}
+
+.input.error {
+  outline: 2px solid red;
+  border: 2px solid red;
+  background-color: #eab5b5;
+}
