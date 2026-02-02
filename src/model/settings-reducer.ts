@@ -7,8 +7,13 @@ export const setSettingsErrorAC = createAction<boolean>('settings/setSettingsErr
 export const MAX_VALUE = 8;
 export const START_VALUE = 0;
 
+export type SettingsStateType = {
+  startValue: number,
+  maxValue: number,
+  settingsError: boolean,
+}
 
-const initialState = {
+const initialState: SettingsStateType = {
   startValue: START_VALUE,
   maxValue: MAX_VALUE,
   settingsError: false
@@ -16,5 +21,13 @@ const initialState = {
 
 export const settingsReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setStartAC, (state, action) => {})
+    .addCase(setStartAC, (state, action) => {
+      state.startValue = action.payload
+    })
+    .addCase(setMaxAC, (state, action) => {
+      state.maxValue = action.payload
+    })
+  .addCase(setSettingsErrorAC, (state, action) => {
+    state.settingsError = action.payload
+  })
 })

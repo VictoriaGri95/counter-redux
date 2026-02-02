@@ -1,15 +1,20 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import { configureStore} from '@reduxjs/toolkit'
+import {counterReducer} from "../model/counter-reducer.ts";
+import {settingsReducer} from "../model/settings-reducer.ts";
 
 
 // объединение reducer'ов с помощью combineReducers
-const rootReducer = combineReducers({
-  counter: counterReducer,
-  settings: settingsReducer,
-})
+// const rootReducer = combineReducers({
+//   counter: counterReducer,
+//   settings: settingsReducer,
+// })
 
 // создание store
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    counter: counterReducer,
+    settings: settingsReducer,
+  },
 })
 
 // автоматическое определение типа всего объекта состояния
