@@ -29,62 +29,33 @@ function App() {
   const {counter, isSet} = counterState
   const {startValue, maxValue, settingsError} = settingsState
 
-  //
-  //
-  // const [settingsError, setSettingsError] = useState(false);
-  //
-  // const [isSet, setIsSet] = useState(false)
-  //
-  // const getValueFromLS = (key: "startValue" | "maxValue", number: number) => {
-  //   const newValue = localStorage.getItem("counterValue");
-  //   return newValue && newValue !== "undefined" ? JSON.parse(newValue)[key] : number;
-  // }
-  // const MAX_VALUE = 8;
-  // const START_VALUE = 0;
-  //
-  // const [maxValue, setMaxValue] = useState(getValueFromLS("maxValue", MAX_VALUE));
-  // const [startValue, setStartValue] = useState(getValueFromLS("startValue", START_VALUE));
-  //
-  // const [counter, setCounter] = useState<number>(startValue);
 
 
   const onClickIncHandler = () => {
-    // const newCount = counter + 1;
-    // if (newCount <= maxValue) {
-    //   setCounter(newCount)
-    // }
     dispatch(incrementAC({maxValue}))
   }
 
   const onClickResetHandler = () => {
-    // setCounter(startValue)
     dispatch(resetAC({startValue}))
 
   }
   const onStartChange = (value: number) => {
-    // setStartValue(value);
-    // setIsSet(false);
-    dispatch(setStartAC(value))
-    dispatch(setIsSetAC(false))
+    dispatch(setStartAC({startValue: value}))
+    dispatch(setIsSetAC({isSet: false}))
   };
 
   const onMaxChange = (value: number) => {
-    // setMaxValue(value);
-    // setIsSet(false);
-    dispatch(setMaxAC(value))
-    dispatch(setIsSetAC(false))
+    dispatch(setMaxAC({maxValue: value}))
+    dispatch(setIsSetAC({isSet: false}))
   };
   const onSetClickHandler = () => {
     if (!settingsError) {
-      // setCounter(startValue)
-      // setIsSet(true);
       dispatch(setCounterAC({startValue}))
     }
   }
   const setHasError = (hasError: boolean) => {
-    dispatch(setSettingsErrorAC(hasError))
+    dispatch(setSettingsErrorAC({settingsError: hasError}))
   }
-
 
 
   return (
@@ -112,52 +83,3 @@ function App() {
 }
 
 export default App
-//
-//
-// const [settingsError, setSettingsError] = useState(false);
-//
-// const [isSet, setIsSet] = useState(false)
-//
-// const getValueFromLS = (key: "startValue" | "maxValue", number: number) => {
-//   const newValue = localStorage.getItem("counterValue");
-//   return newValue && newValue !== "undefined" ? JSON.parse(newValue)[key] : number;
-// }
-// const MAX_VALUE = 8;
-// const START_VALUE = 0;
-//
-// const [maxValue, setMaxValue] = useState(getValueFromLS("maxValue", MAX_VALUE));
-// const [startValue, setStartValue] = useState(getValueFromLS("startValue", START_VALUE));
-//
-// const [counter, setCounter] = useState<number>(startValue);
-//
-//
-// const onClickIncHandler = () => {
-//   const newCount = counter + 1;
-//   if (newCount <= maxValue) {
-//     setCounter(newCount)
-//   }
-// }
-//
-// const onClickResetHandler = () => {
-//   setCounter(startValue)
-//
-// }
-// const onStartChange = (value: number) => {
-//   setStartValue(value);
-//   setIsSet(false);
-// };
-//
-// const onMaxChange = (value: number) => {
-//   setMaxValue(value);
-//   setIsSet(false);
-// };
-// const onSetClickHandler = () => {
-//   if (!settingsError) {
-//     setCounter(startValue)
-//     setIsSet(true);
-//     localStorage.setItem('counterSettings', JSON.stringify({
-//       startValue,
-//       maxValue
-//     }))
-//   }
-// }

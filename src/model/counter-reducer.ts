@@ -5,7 +5,7 @@ import {START_VALUE} from "./settings-reducer.ts";
 export const incrementAC = createAction<{ maxValue: number }>('counter/increment');
 export const resetAC = createAction<{ startValue: number }>('counter/reset');
 export const setCounterAC = createAction<{ startValue: number }>('counter/set')
-export const setIsSetAC = createAction<boolean>('counter/setIsSet')
+export const setIsSetAC = createAction<{isSet: boolean}>('counter/setIsSet')
 
 
 export type CounterStateType = {
@@ -34,6 +34,6 @@ export const counterReducer = createReducer(initialState, (builder) => {
       state.isSet = true
     })
     .addCase(setIsSetAC, (state, action) => {
-      state.isSet = action.payload
+      state.isSet = action.payload.isSet
     })
 });

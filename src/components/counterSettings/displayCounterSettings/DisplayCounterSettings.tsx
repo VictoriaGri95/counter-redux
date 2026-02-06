@@ -24,24 +24,26 @@ export const DisplayCounterSettings = ({
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-
-    e.target.value = value.toString();
-
     setMaxValue(value);
-    const error = value <= startValue || value < 0;
-    setMaxError(error);
-    setHasError(error || startError);
+
+    const hasMaxError = value <= startValue || value < 0;
+    const hasStartError = startValue < 0 || startValue >= value;
+
+    setMaxError(hasMaxError);
+    setStartError(hasStartError);
+    setHasError(hasMaxError || hasStartError);
   };
 
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-
-    e.target.value = value.toString();
     setStartValue(value);
-    const error = value < 0 || value >= maxValue
 
-    setStartError(error);
-    setHasError(error || maxError)
+    const hasStartError = value < 0 || value >= maxValue;
+    const hasMaxError = maxValue <= value || maxValue < 0;
+
+    setStartError(hasStartError);
+    setMaxError(hasMaxError);
+    setHasError(hasStartError || hasMaxError);
   };
   return (
     <div className={s.inputWrapper}>

@@ -1,8 +1,8 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 
-export const setStartAC = createAction<number>('settings/setStart')
-export const setMaxAC = createAction<number>('settings/setMax')
-export const setSettingsErrorAC = createAction<boolean>('settings/setSettingsError')
+export const setStartAC = createAction<{startValue: number}>('settings/setStart')
+export const setMaxAC = createAction<{maxValue: number}>('settings/setMax')
+export const setSettingsErrorAC = createAction<{settingsError: boolean}>('settings/setSettingsError')
 
 export const MAX_VALUE = 8;
 export const START_VALUE = 0;
@@ -22,12 +22,12 @@ const initialState: SettingsStateType = {
 export const settingsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setStartAC, (state, action) => {
-      state.startValue = action.payload
+      state.startValue = action.payload.startValue
     })
     .addCase(setMaxAC, (state, action) => {
-      state.maxValue = action.payload
+      state.maxValue = action.payload.maxValue
     })
   .addCase(setSettingsErrorAC, (state, action) => {
-    state.settingsError = action.payload
+    state.settingsError = action.payload.settingsError
   })
 })
