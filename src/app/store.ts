@@ -1,6 +1,8 @@
-import { configureStore} from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import {counterReducer} from "../model/counter-reducer.ts";
-import {settingsReducer} from "../model/settings-reducer.ts";
+
+
+
 
 
 // объединение reducer'ов с помощью combineReducers
@@ -13,7 +15,6 @@ import {settingsReducer} from "../model/settings-reducer.ts";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    settings: settingsReducer,
   },
 })
 

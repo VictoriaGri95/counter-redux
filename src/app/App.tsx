@@ -6,28 +6,21 @@ import {
 import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 import {selectCounter} from "../model/counter-selectors.ts";
-import {selectSettings} from "../model/settings-selectors.ts";
 import {
   incrementAC,
-  resetAC,
-  setCounterAC,
-  setIsSetAC
-} from "../model/counter-reducer.ts";
-import {
-  setMaxAC,
-  setSettingsErrorAC,
+  resetAC, setCounterAC, setIsSetAC, setMaxAC, setSettingsErrorAC,
   setStartAC
-} from "../model/settings-reducer.ts";
+} from "../model/counter-reducer.ts";
+
 
 function App() {
 
 
-  const settingsState = useAppSelector(selectSettings)
+
   const counterState = useAppSelector(selectCounter)
   const dispatch = useAppDispatch()
 
-  const {counter, isSet} = counterState
-  const {startValue, maxValue, settingsError} = settingsState
+  const {counter, isSet, startValue, maxValue, settingsError} = counterState
 
 
 

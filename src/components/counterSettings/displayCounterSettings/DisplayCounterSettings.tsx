@@ -1,50 +1,57 @@
 import s from './DisplayCounterSettings.module.scss';
 import * as React from "react";
-import {useState} from "react";
+import {useAppDispatch} from "../../../common/hooks/useAppDispatch.ts";
+import {
+  setMaxAC,
+  setMaxErrorAC, setSettingsErrorAC, setStartAC,
+  setStartErrorAC
+} from "../../../model/counter-reducer.ts";
+import {useAppSelector} from "../../../common/hooks/useAppSelector.ts";
+import {selectCounter} from "../../../model/counter-selectors.ts";
 
 
-export type DisplayCounterSettingsProps = {
-  startValue: number
-  maxValue: number
-  setStartValue: (startValue: number) => void
-  setMaxValue: (maxValue: number) => void
-  hasError: boolean
-  setHasError: (hasError: boolean) => void
-}
+// export type DisplayCounterSettingsProps = {
+//   startValue: number
+//   maxValue: number
+//   setStartValue: (startValue: number) => void
+//   setMaxValue: (maxValue: number) => void
+//   hasError: boolean
+//   setHasError: (hasError: boolean) => void
+// }
 
-export const DisplayCounterSettings = ({
-                                         startValue,
-                                         maxValue,
-                                         setStartValue,
-                                         setMaxValue,
-                                         setHasError
-                                       }: DisplayCounterSettingsProps) => {
-  const [startError, setStartError] = useState(false);
-  const [maxError, setMaxError] = useState(false);
+export const DisplayCounterSettings = () => {
+
+  const dispatch = useAppDispatch()
+  const counterState = useAppSelector(selectCounter)
+  const {startError, maxError, startValue, maxValue} = counterState
+
+  const updateErrors = (newStartValue: number,newMaxValue: number) => {
+
+    const hasStartError = newStartValue < 0 || newStartValue >= newMaxValue;
+    const hasMaxError = newMaxValue <= newStartValue || newMaxValue < 0;
+
+    dispatch(setStartErrorAC({startError: hasStartError}))
+    dispatch(setMaxErrorAC({maxError: hasMaxError}))
+    dispatch(setSettingsErrorAC({settingsError: hasMaxError || hasStartError}))
+  }
+
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-    setMaxValue(value);
 
-    const hasMaxError = value <= startValue || value < 0;
-    const hasStartError = startValue < 0 || startValue >= value;
+    dispatch(setMaxAC({ maxValue: value }))
 
-    setMaxError(hasMaxError);
-    setStartError(hasStartError);
-    setHasError(hasMaxError || hasStartError);
+    updateErrors(startValue, value)
   };
 
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-    setStartValue(value);
 
-    const hasStartError = value < 0 || value >= maxValue;
-    const hasMaxError = maxValue <= value || maxValue < 0;
+    dispatch(setStartAC({startValue: value}))
 
-    setStartError(hasStartError);
-    setMaxError(hasMaxError);
-    setHasError(hasStartError || hasMaxError);
+    updateErrors(value, maxValue)
   };
+
   return (
     <div className={s.inputWrapper}>
       <div className={s.settingInput}>
