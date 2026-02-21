@@ -2,9 +2,6 @@ import {configureStore} from '@reduxjs/toolkit'
 import {counterReducer} from "../model/counter-reducer.ts";
 
 
-
-
-
 // объединение reducer'ов с помощью combineReducers
 // const rootReducer = combineReducers({
 //   counter: counterReducer,

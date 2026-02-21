@@ -3,44 +3,31 @@ import {
   DisplayCounterSettings
 } from "./displayCounterSettings/DisplayCounterSettings.tsx";
 import {Button} from "../button/Button.tsx";
+import {setCounterAC} from "../../model/counter-reducer.ts";
+import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
+import {selectCounter} from "../../model/counter-selectors.ts";
+import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
 
 
-export type CounterSettingsProps = {
-  startValue: number;
-  maxValue: number;
-  setStartValue: (startValue: number) => void;
-  setMaxValue: (maxValue: number) => void;
-  onSetClick: () => void;
-  hasError: boolean,
-  setHasError: (hasError: boolean) => void
-}
+export const CounterSettings = () => {
 
-export const CounterSettings = ({
-                                  startValue,
-                                  maxValue,
-                                  setStartValue,
-                                  setMaxValue,
-                                  onSetClick,
-                                  hasError,
-                                  setHasError,
-                                }: CounterSettingsProps) => {
+  const counterState = useAppSelector(selectCounter)
+  const dispatch = useAppDispatch()
 
-
+  const {startValue, settingsError} = counterState
+  const onSetClick = () => {
+    if (!settingsError) {
+      dispatch(setCounterAC({startValue}))
+    }
+  }
   return (
     <div className={s.counterWrapper}>
-      <DisplayCounterSettings
-        startValue={startValue}
-        maxValue={maxValue}
-        setStartValue={setStartValue}
-        setMaxValue={setMaxValue}
-        setHasError={setHasError}
-        hasError={hasError}
-      />
+      <DisplayCounterSettings />
       <div className={s.buttonsWrapper}>
         <Button
           title="set"
           onClick={onSetClick}
-          disabled={hasError}
+          disabled={settingsError}
         />
       </div>
     </div>

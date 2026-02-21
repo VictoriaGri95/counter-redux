@@ -1,8 +1,9 @@
 import s from './Button.module.scss';
 
+
 type ButtonPropsType = {
   title: string,
-  onClick?: () => void,
+  onClick: () => void,
   disabled?: boolean
 }
 
@@ -11,6 +12,8 @@ export const Button = ({
                          onClick,
                          disabled,
                        }: ButtonPropsType) => {
+
+
   return (
     <button
       onClick={onClick}

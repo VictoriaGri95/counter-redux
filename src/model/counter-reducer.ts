@@ -16,8 +16,12 @@ export const setSettingsErrorAC = createAction<{
   settingsError: boolean
 }>('counter/setSettingsError')
 
-export const setStartErrorAC = createAction<{startError: boolean}>('counter/setStartError')
-export const setMaxErrorAC = createAction<{maxError: boolean}>('counter/setMaxErrorError')
+export const setStartErrorAC = createAction<{
+  startError: boolean
+}>('counter/setStartError')
+export const setMaxErrorAC = createAction<{
+  maxError: boolean
+}>('counter/setMaxError')
 
 
 export const MAX_VALUE = 8;
@@ -71,7 +75,7 @@ export const counterReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setStartErrorAC, (state, action) => {
       state.startError = action.payload.startError
-  })
+    })
     .addCase(setMaxErrorAC, (state, action) => {
       state.maxError = action.payload.maxError
     })

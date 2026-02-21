@@ -1,27 +1,27 @@
 import {DisplayCounter} from "./displayCounter/DisplayCounter.tsx";
 import s from './Counter.module.scss'
 import {Button} from "../button/Button.tsx";
+import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
+import {selectCounter} from "../../model/counter-selectors.ts";
+import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
+import {incrementAC, resetAC} from "../../model/counter-reducer.ts";
 
-export type CounterProps = {
-  startValue: number;
-  maxValue: number;
-  onInc: () => void;
-  onReset: () => void;
-  counter: number;
-  hasError: boolean
-  isSet: boolean
-}
 
-export const Counter = ({
-                          startValue,
-                          maxValue,
-                          onInc,
-                          onReset,
-                          counter,
-                          hasError,
-                          isSet,
-                        }: CounterProps) => {
+export const Counter = () => {
+  const counterState = useAppSelector(selectCounter)
 
+  const dispatch = useAppDispatch()
+
+  const {counter, isSet, startValue, maxValue, settingsError} = counterState
+
+  const onIncHandler = () => {
+    dispatch(incrementAC({maxValue}))
+  }
+
+  const onResetHandler = () => {
+    dispatch(resetAC({startValue}))
+
+  }
   const hasReachedMax = counter === maxValue;
   const isMinValue = counter === startValue;
 
@@ -30,7 +30,7 @@ export const Counter = ({
       <DisplayCounter
         counter={counter}
         isMax={hasReachedMax}
-        hasError={hasError}
+        hasError={settingsError}
         isSet={isSet}
       />
 
@@ -38,13 +38,13 @@ export const Counter = ({
       <div className={s.buttonsWrapper}>
         <Button
           title="inc"
-          onClick={onInc}
-          disabled={!isSet || hasReachedMax || hasError}
+          onClick={onIncHandler}
+          disabled={!isSet || hasReachedMax || settingsError}
         />
         <Button
           title="reset"
-          onClick={onReset}
-          disabled={!isSet || isMinValue || hasError}
+          onClick={onResetHandler}
+          disabled={!isSet || isMinValue || settingsError}
         />
       </div>
 
